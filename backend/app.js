@@ -24,6 +24,7 @@ app
 
 app
   .route("/assignuser")
+  .get(userController.GetAllAssignedUsers)
   .post(userController.AssignUser)
 
 

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const AssignedUserSchema = new Schema({
   userId: {
-    type: Guid,
+    type:  Schema.Types.ObjectId,
     required: true
   }  
 });

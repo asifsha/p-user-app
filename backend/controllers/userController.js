@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const AssigndUser = require("../models/assingedUser");
+const AssigndUser = require("../models/assignedUser");
 
 exports.GetAllUsers = (req, res) => {
     User.find({}, (err, user) => {
@@ -18,6 +18,16 @@ exports.AssignUser = (req, res) => {
     }
     res.status(201).json(assingedUser);
   });
+};
+
+
+exports.GetAllAssignedUsers = (req, res) => {
+  AssigndUser.find({}, (err, user) => {
+  if (err) {
+    res.status(500).send(err);
+  }
+  res.status(200).json(user);
+});
 };
 
 exports.SearchUsers = (req, body) => {
