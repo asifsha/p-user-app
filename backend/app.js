@@ -25,7 +25,7 @@ app
 app
   .route("/assignuser")
   .get(userController.GetAllAssignedUsers)
-  .post(userController.AssignUser)
+  .post(userController.AssignUser);
 
 
 app.listen(port, () => {
