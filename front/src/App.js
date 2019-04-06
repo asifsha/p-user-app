@@ -6,7 +6,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <UserList title={'All Users'}></UserList>
+        <div style={{ float: 'left', width: 400 }}>
+          <UserList title={'All Users'} images={[]} style={{ paddingLeft: 10 }}></UserList>
+        </div>
+        <div style={{ float:'right' }}>
+          <UserList title={'Assigned Users'} images={[]} style={{ paddingLeft: 10}}></UserList>
+        </div>
+
         {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
