@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class Panel extends React.Component {
-
-    // constructor(props) {
-    //     super(props);
-       
-    // }
+class Panel extends React.Component {  
 
    render(){
     return (
@@ -16,16 +11,13 @@ class Panel extends React.Component {
     )
    }
 
-  //
+  
 }
 
 Panel.propTypes = {
     width: PropTypes.number.isRequired,    
     height: PropTypes.number.isRequired  
 };
-// const panelStyle = {
-   
-   
-//   };
+
 export default Panel;
 
