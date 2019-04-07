@@ -45,15 +45,16 @@ class UserList extends React.Component {
       let user = this.state.filterdUsers[i];
       
      
-        children.push(<td style={{ width: 48, height: 48 }}>
-          <img src={user.picture.thumbnail} alt={user.name.first + ' ' + user.name.last} />
+        children.push(<td key={i} style={{ width: 48, height: 48 }}>
+          <img src={user.picture.thumbnail} alt={user.name.first + ' ' + user.name.last} 
+          onClick={()=> this.props.onSelectUser(user)}/>
            <div>{user.name.first + ' ' + user.name.last}</div>
            </td>)
     
       
       if( (i+1 ) % 3 === 0)
       {
-        table.push(<tr>{children}</tr>);
+        table.push(<tr key={i}>{children}</tr>);
         children=[];
       }
     }

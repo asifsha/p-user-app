@@ -20,6 +20,55 @@ static baseUrl = 'http://localhost:3301';
           });
       });
     }
+
+    static getAssingedUsers() {
+      return new Promise((resolve, reject) => {      
+       
+        const getassignuser = '/assignuser';
+               
+        fetch(ServiceApi.baseUrl+getassignuser, {
+          method: 'GET'
+        },{mode: 'cors'}).then(response => response.json())
+          .then(function(data) 
+          {             
+              resolve(data);
+                        
+          })
+          .catch(function (error) {
+            console.error('Error:', error);
+            reject(error);
+          });
+      });
+    }
+
+    static assignUser(user) {
+      return new Promise((resolve, reject) => {      
+       
+        const assignuser = '/assignuser';
+               console.log(user);
+               console.log({userId: user._id});
+        fetch(ServiceApi.baseUrl+assignuser, {
+          method: 'POST',
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     "Access-Control-Allow-Origin" : "*"
+        //     // "Content-Type": "application/x-www-form-urlencoded",
+        // },
+        body : JSON.stringify({userId: user._id})
+        },{mode: 'cors'}).then(response => response.json())
+          .then(function(data) 
+          {             
+              resolve(data);
+                        
+          })
+          .catch(function (error) {
+            console.error('in eror');
+            console.error('Error:', error);
+            reject(error);
+          });
+      });
+    }
+
   }
   
   
