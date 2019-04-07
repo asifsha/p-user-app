@@ -18,9 +18,11 @@ class App extends Component {
   }
 
   async loadData() {
-    let data = await ServiceApi.getUsers();
-    console.log(data[0].results);
-    this.setState({ users: data[0].results | [] });
+    ServiceApi.getUsers().then(response=>{
+      console.log(response[0].results);
+      this.setState({ users: response[0].results || [] });      
+    });
+   
   }
   render() {
     return (

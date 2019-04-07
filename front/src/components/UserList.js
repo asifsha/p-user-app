@@ -3,7 +3,7 @@ import TextInput from './TextInput';
 import Panel from './Panel';
 
 class UserList extends React.Component {
-  // Declare a new state variable, which we'll call "count"
+  
 
   constructor(props) {
     super(props)
@@ -11,8 +11,8 @@ class UserList extends React.Component {
     this.setSearch = this.setSearch.bind(this);
   }
 
-  componentWillReceiveProps(nextProps, nextState){
-    this.setState({users:nextProps.users});
+  componentWillReceiveProps(nextProps, nextState) {
+    this.setState({ users: nextProps.users, filterdUsers:nextProps.users });
   }
 
   setSearch(value) {
@@ -24,6 +24,8 @@ class UserList extends React.Component {
 
   resetSearch() {
     this.setState({ search: '' });
+    let users = this.state.users;
+    this.setState({ filterdUsers: users });
   }
 
   renderX() {
@@ -37,21 +39,32 @@ class UserList extends React.Component {
   createTable() {
     let table = []
 
-    // Outer loop to create parent
+    let children = []
+    
     for (let i = 0; i < this.state.filterdUsers.length; i++) {
       let user = this.state.filterdUsers[i];
-      let children = []
-      //Inner loop to create children
-      for (let j = 0; j < 3; j++) {
-        children.push(<td style={{ width: 48, height: 48 }}>{`<img src=${user.pictures.thumbnail} alt=${user.name.first + user.name.last} /> ${j + 1}`}</td>)
+      
+     
+        children.push(<td style={{ width: 48, height: 48 }}>
+          <img src={user.picture.thumbnail} alt={user.name.first + ' ' + user.name.last} />
+           <div>{user.name.first + ' ' + user.name.last}</div>
+           </td>)
+    
+      
+      if( (i+1 ) % 3 === 0)
+      {
+        table.push(<tr>{children}</tr>);
+        children=[];
       }
-      //Create the parent and add the children
-      table.push(<tr>{children}</tr>)
     }
     return table
   }
+
+  
+
   render() {
-    console.log(this.state.users);
+   
+
     return (
       <div style={{ width: 400, height: 600 }}>
         <TextInput type="text" value={this.state.search} onChange={(event) => this.setSearch(event.target.value)} placeholder="Search" />
@@ -59,9 +72,13 @@ class UserList extends React.Component {
         <Panel width={400} height={500} style={{ paddingTop: 10 }}>
           <h2>{this.props.title}</h2>
 
-          <table>
+          <table >
+            <tbody style={{display: 'block', height:360, overflow:'scroll',
+          }}>
             {this.createTable()}
-          </table>
+            </tbody>
+          </table>    
+  
         </Panel>
 
       </div>

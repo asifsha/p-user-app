@@ -5,7 +5,12 @@ class Panel extends React.Component {
 
    render(){
     return (
-         <div style={ { border : '1px solid black', width: this.props.width,height: this.props.height}}> 
+         <div style={ { border : '1px solid black', 
+         width: this.props.width,
+         height: this.props.height
+         
+         
+         }}> 
               {this.props.children}
          </div>
     )
