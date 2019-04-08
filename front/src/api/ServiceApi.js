@@ -54,7 +54,7 @@ static baseUrl = 'http://localhost:3301';
         //     "Access-Control-Allow-Origin" : "*"
         //     // "Content-Type": "application/x-www-form-urlencoded",
         // },
-        body : JSON.stringify({userId: user._id})
+        body : JSON.stringify({user: user._id})
         },{mode: 'cors'}).then(response => response.json())
           .then(function(data) 
           {             

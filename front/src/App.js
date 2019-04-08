@@ -27,10 +27,10 @@ class App extends Component {
 
     ServiceApi.getAssingedUsers().then(response => {
       console.log(response);
-      if(response[0]!==undefined)
+      if(response!==undefined)
       {
       console.log(response);
-      this.setState({ assignedUsers: response || [] });
+      //this.setState({ assignedUsers: response || [] });
       }
     });
 
