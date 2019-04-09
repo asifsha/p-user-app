@@ -21,18 +21,14 @@ class App extends Component {
 
   async loadData() {
     ServiceApi.getUsers().then(response => {
-      console.log(response);
+      
       this.setState({ users: response || [] });
     });
 
     ServiceApi.getAssingedUsers().then(response => {
-      //console.log(response);
-      //if(response!==undefined)
-      {
-        console.log(response);
-        this.setState({ assignedUsers: response || [] });
-      }
-      console.log(this.state.assignedUsers);
+
+      this.setState({ assignedUsers: response || [] });
+
     });
 
 
@@ -73,15 +69,15 @@ class App extends Component {
             </td>
             <td>
               <div style={{ width: 400 }}>
-                <UserList title={'Assigned Users'} 
-                users={this.state.assignedUsers} 
-                isAllowedSelection={false}
-                style={{ paddingLeft: 10 }}></UserList>
+                <UserList title={'Assigned Users'}
+                  users={this.state.assignedUsers}
+                  isAllowedSelection={false}
+                  style={{ paddingLeft: 10 }}></UserList>
               </div>
             </td>
           </tr>
           <tr>
-            <td> <button style={{backgroundColor:'#1E90FF' , color:'#fff',width:120}} onClick={() => this.add()}>Add</button></td>
+            <td> <button style={{ backgroundColor: '#1E90FF', color: '#fff', width: 120 }} onClick={() => this.add()}>Add</button></td>
             <td></td>
           </tr>
         </table>

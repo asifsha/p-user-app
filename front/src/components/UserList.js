@@ -46,20 +46,13 @@ class UserList extends React.Component {
     let children = []
     
     for (let i = 0; i < this.state.filterdUsers.length; i++) {
-      let user = this.state.filterdUsers[i];
-      //console.log(this.state.selectedUser);
-      // let isSelected=false;
-      // if(this.state.selectedUser!==undefined)
-      // isSelected=user._id === this.state.selectedUser._id;
-      //console.log(isSelected);
+      let user = this.state.filterdUsers[i];      
       let style={width: 48, height: 48};
-      // border: '1px ' + (isSelected ? 'solid ' : 'none') + '#67E2B5' 
+     
 
         children.push(<td key={i} style={{ style  }} onClick = {(e)=>this.inputClickHandler(e, user)}>
           <img src={user.picture.thumbnail} alt={user.name.first + ' ' + user.name.last} 
-          // onClick={()=> {
-          //   this.setState({selectedUser:user});
-          //   this.props.onSelectUser(user)}}
+         
             />
            <div>{user.name.first + ' ' + user.name.last}</div>
            </td>)
@@ -82,11 +75,7 @@ class UserList extends React.Component {
     if(lastCell!==undefined)
     {
       lastCell.style.border='none';
-    }
-    console.log('incluck');
-    console.log(e.target);
-    console.log(e.target.parentNode);
-    console.log(e.target.parentNode.nodeName);
+    }    
     e = e||window.event;
     var tdElm = e.target||e.srcElement;
     if(e.target.parentNode.nodeName==='TD')

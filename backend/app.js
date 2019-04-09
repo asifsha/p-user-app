@@ -29,11 +29,6 @@ app.use(cors(corsOptions));
 app
   .route("/users")
   .get(userController.GetAllUsers);
-  
-
-app
-  .route("/users/:name")
-  .get(userController.SearchUsers);
 
 app
   .route("/assignuser")
