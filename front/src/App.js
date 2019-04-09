@@ -26,12 +26,13 @@ class App extends Component {
     });
 
     ServiceApi.getAssingedUsers().then(response => {
-      console.log(response);
-      if(response!==undefined)
+      //console.log(response);
+      //if(response!==undefined)
       {
       console.log(response);
-      //this.setState({ assignedUsers: response || [] });
+      this.setState({ assignedUsers: response || [] });
       }
+      console.log(this.state.assignedUsers);
     });
 
 
@@ -50,7 +51,7 @@ class App extends Component {
 
     ServiceApi.assignUser(this.state.selectedUser).then((res) => {
       this.setState({ selectUser: null });
-
+      this.loadData();
     }).catch((err) => {
       this.setState({ error: true, errorMsg: 'Error while assigning user.<br/>' + err })
     })

@@ -9,6 +9,7 @@ class UserList extends React.Component {
     super(props)
     this.state = { search: '', users: this.props.users, filterdUsers: this.props.users }
     this.setSearch = this.setSearch.bind(this);
+    this.inputClickHandler=this.inputClickHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps, nextState) {
@@ -45,20 +46,33 @@ class UserList extends React.Component {
       let user = this.state.filterdUsers[i];
       
      
-        children.push(<td key={i} style={{ width: 48, height: 48 }}>
+        children.push(<td key={i} style={{ width: 48, height: 48 }} onClick = {(e)=>this.inputClickHandler(e)}>
           <img src={user.picture.thumbnail} alt={user.name.first + ' ' + user.name.last} 
           onClick={()=> this.props.onSelectUser(user)}/>
            <div>{user.name.first + ' ' + user.name.last}</div>
            </td>)
     
       
-      if( (i+1 ) % 3 === 0)
+      if( ((i+1 ) % 3 === 0 ) || i+1 === this.state.filterdUsers.length ) 
       {
         table.push(<tr key={i}>{children}</tr>);
         children=[];
       }
     }
     return table
+  }
+
+  inputClickHandler(e){
+    console.log('incluck');
+    console.log(e);
+    e = e||window.event;
+    var tdElm = e.target||e.srcElement;
+    tdElm.style.border='1 solid #fff';
+    // //if(tdElm.style.border === 'rgb(255, 0, 0)'){
+    //     tdElm.style.backgroundColor = '#fff';
+    // } else {
+    //     tdElm.style.backgroundColor = '#f00';
+    // }
   }
 
   
