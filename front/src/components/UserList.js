@@ -7,13 +7,14 @@ class UserList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { search: '', users: this.props.users, filterdUsers: this.props.users }
+    this.state = { search: '', users: this.props.users, filterdUsers: this.props.users, selectedUser: undefined }
     this.setSearch = this.setSearch.bind(this);
     this.inputClickHandler=this.inputClickHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps, nextState) {
     this.setState({ users: nextProps.users, filterdUsers:nextProps.users });
+    this.clearSelection();
   }
 
   setSearch(value) {
@@ -21,6 +22,8 @@ class UserList extends React.Component {
     let users = this.state.users;
     users = users.filter((arr) => { return arr.name.first.toLowerCase().includes(value.toLowerCase()) || arr.name.last.toLowerCase().includes(value.toLowerCase()); });
     this.setState({ filterdUsers: users });
+    this.clearSelection();
+    this.props.onSelectUser(undefined);
   }
 
   resetSearch() {
@@ -44,11 +47,20 @@ class UserList extends React.Component {
     
     for (let i = 0; i < this.state.filterdUsers.length; i++) {
       let user = this.state.filterdUsers[i];
-      
-     
-        children.push(<td key={i} style={{ width: 48, height: 48 }} onClick = {(e)=>this.inputClickHandler(e)}>
+      //console.log(this.state.selectedUser);
+      // let isSelected=false;
+      // if(this.state.selectedUser!==undefined)
+      // isSelected=user._id === this.state.selectedUser._id;
+      //console.log(isSelected);
+      let style={width: 48, height: 48};
+      // border: '1px ' + (isSelected ? 'solid ' : 'none') + '#67E2B5' 
+
+        children.push(<td key={i} style={{ style  }} onClick = {(e)=>this.inputClickHandler(e, user)}>
           <img src={user.picture.thumbnail} alt={user.name.first + ' ' + user.name.last} 
-          onClick={()=> this.props.onSelectUser(user)}/>
+          // onClick={()=> {
+          //   this.setState({selectedUser:user});
+          //   this.props.onSelectUser(user)}}
+            />
            <div>{user.name.first + ' ' + user.name.last}</div>
            </td>)
     
@@ -62,17 +74,34 @@ class UserList extends React.Component {
     return table
   }
 
-  inputClickHandler(e){
+  inputClickHandler(e, user){
+    if(this.props.isAllowedSelection===false)
+    return;
+    this.props.onSelectUser(user);
+    let lastCell=this.state.lastCell;
+    if(lastCell!==undefined)
+    {
+      lastCell.style.border='none';
+    }
     console.log('incluck');
-    console.log(e);
+    console.log(e.target);
+    console.log(e.target.parentNode);
+    console.log(e.target.parentNode.nodeName);
     e = e||window.event;
     var tdElm = e.target||e.srcElement;
-    tdElm.style.border='1 solid #fff';
-    // //if(tdElm.style.border === 'rgb(255, 0, 0)'){
-    //     tdElm.style.backgroundColor = '#fff';
-    // } else {
-    //     tdElm.style.backgroundColor = '#f00';
-    // }
+    if(e.target.parentNode.nodeName==='TD')
+    tdElm=e.target.parentNode;
+
+    tdElm.style.border='2px solid #1E90FF';
+    this.setState({lastCell:tdElm});   
+  }
+
+  clearSelection(){
+    let lastCell=this.state.lastCell;
+    if(lastCell!==undefined)
+    {
+      lastCell.style.border='none';
+    }
   }
 
   
@@ -81,7 +110,7 @@ class UserList extends React.Component {
    
 
     return (
-      <div style={{ width: 400, height: 600 }}>
+      <div style={{ width: 400, height: 550 }}>
         <TextInput type="text" value={this.state.search} onChange={(event) => this.setSearch(event.target.value)} placeholder="Search" />
         {this.renderX()}
         <Panel width={400} height={500} style={{ paddingTop: 10 }}>

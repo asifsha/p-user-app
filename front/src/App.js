@@ -29,8 +29,8 @@ class App extends Component {
       //console.log(response);
       //if(response!==undefined)
       {
-      console.log(response);
-      this.setState({ assignedUsers: response || [] });
+        console.log(response);
+        this.setState({ assignedUsers: response || [] });
       }
       console.log(this.state.assignedUsers);
     });
@@ -60,16 +60,34 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.error === true && <div style={{ color: '#8B0000' }} dangerouslySetInnerHTML={{ __html: this.state.errorMsg}}></div>}
-        <div style={{ float: 'left', width: 400, paddingLeft: 10 }}>
-          <UserList title={'All Users'} users={this.state.users}
-            onSelectUser={this.selectUser}
-            style={{ paddingLeft: 10 }}></UserList>
-        </div>
-        <button onClick={() => this.add()}>Add</button>
-        <div style={{ float: 'right' }}>
-          <UserList title={'Assigned Users'} users={this.state.assignedUsers} style={{ paddingLeft: 10 }}></UserList>
-        </div>
+        {this.state.error === true && <div style={{ color: '#8B0000' }} dangerouslySetInnerHTML={{ __html: this.state.errorMsg }}></div>}
+        <table>
+          <tr>
+            <td>
+              <div style={{ width: 400, paddingLeft: 10 }}>
+                <UserList title={'All Users'} users={this.state.users}
+                  onSelectUser={this.selectUser}
+                  isAllowedSelection={true}
+                  style={{ paddingLeft: 10 }}></UserList>
+              </div>
+            </td>
+            <td>
+              <div style={{ width: 400 }}>
+                <UserList title={'Assigned Users'} 
+                users={this.state.assignedUsers} 
+                isAllowedSelection={false}
+                style={{ paddingLeft: 10 }}></UserList>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td> <button style={{backgroundColor:'#1E90FF' , color:'#fff',width:120}} onClick={() => this.add()}>Add</button></td>
+            <td></td>
+          </tr>
+        </table>
+
+
+
       </div>
     );
   }
