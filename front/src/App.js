@@ -26,7 +26,7 @@ class App extends Component {
     });
 
     ServiceApi.getAssingedUsers().then(response => {
-
+      
       this.setState({ assignedUsers: response || [] });
 
     });
@@ -35,6 +35,7 @@ class App extends Component {
   }
 
   selectUser(user) {
+    
     this.setState({ selectedUser: user });
 
   }
@@ -58,6 +59,7 @@ class App extends Component {
       <div className="App">
         {this.state.error === true && <div style={{ color: '#8B0000' }} dangerouslySetInnerHTML={{ __html: this.state.errorMsg }}></div>}
         <table>
+          <tbody>
           <tr>
             <td>
               <div style={{ width: 400, paddingLeft: 10 }}>
@@ -80,6 +82,7 @@ class App extends Component {
             <td> <button style={{ backgroundColor: '#1E90FF', color: '#fff', width: 120 }} onClick={() => this.add()}>Add</button></td>
             <td></td>
           </tr>
+          </tbody>
         </table>
 
 
