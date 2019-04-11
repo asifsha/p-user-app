@@ -9,11 +9,13 @@ const cors = require('cors');
 const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+    callback(null, true);
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true)
+    // } else {
+    //   console.log(origin);
+    //   callback(new Error('Not allowed by CORS'))
+    // }
   }
 }
 
@@ -39,3 +41,5 @@ app
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+module.exports=app;
