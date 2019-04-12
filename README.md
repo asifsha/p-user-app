@@ -1,10 +1,14 @@
-# p-user-app
+# User App
+
+![demo](https://raw.githubusercontent.com/asifsha/p-user-app/master/demo/userapp.gif)
 
 ## Explanation
 I used node js as backend as a credit card was required to use Azure Functions.
 ### API Endpoints
 /users - get - returns all unassinged users
+
 /assignuser - get - returns all assinged users
+
 /assignuser - post - assign a user 
 
 ### curl commmands
@@ -37,5 +41,6 @@ to start server
 npm start
 to test
 npm test
+
 
 
